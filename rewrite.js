@@ -33,9 +33,12 @@ var arr = [5, 7, 10, 15];
 var foundElement = arr.find(ele => ele > 8);
 
 console.log(foundElement); // 10, phần tử đầu tiên lớn hơn 8
-//some() kiểm tra xem ít nhất một phần tử trong mảng có thỏa mãn điều kiện không.
+//some() kiểm tra xem ít nhất một phần tử trong mảng có thỏa mãn điều kiện không. any cũng giống
 var arr = [5, 7, 10, 15];
 var isAnyGreaterThanTen = arr.some(ele => ele > 10);
 
 console.log(isAnyGreaterThanTen); // true, vì 15 lớn hơn 10
+// flatMap() áp dụng một hàm sau đó làm phẳng mảng con trong một bước.
+var flatMappedArr = arr.flatMap(ele => [ele, ele * 2]);
+console.log(flatMappedArr); // [5, 10, 7, 14, 10, 20, 15, 30]
 
