@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gymnastics Winner</title>
+</head>
+<body>
+    <h1>Gymnastics Winner Calculation</h1>
+    <div id="result"></div>
+
+    <script>
+        // Arrow function to calculate average score
+        const calcAverage = (score1, score2, score3) => (score1 + score2 + score3) / 3;
+
+        // Function to determine and log the winner
+        function checkWinner(avgDolphins, avgKoalas) {
+            if (avgDolphins >= 2 * avgKoalas) {
+                console.log(`Dolphins win (${avgDolphins.toFixed(2)} vs. ${avgKoalas.toFixed(2)})`);
+                return `Dolphins win (${avgDolphins.toFixed(2)} vs. ${avgKoalas.toFixed(2)})`;
+            } else if (avgKoalas >= 2 * avgDolphins) {
+                console.log(`Koalas win (${avgKoalas.toFixed(2)} vs. ${avgDolphins.toFixed(2)})`);
+                return `Koalas win (${avgKoalas.toFixed(2)} vs. ${avgDolphins.toFixed(2)})`;
+            } else {
+                console.log('No team wins.');
+                return 'No team wins.';
+            }
+        }
+
+        // Data 1
+        let dolphinsScores1 = [44, 23, 71];
+        let koalasScores1 = [65, 54, 49];
+
+        // Data 2
+        let dolphinsScores2 = [85, 54, 41];
+        let koalasScores2 = [23, 34, 27];
+
+        // Calculate averages
+        let avgDolphins1 = calcAverage(...dolphinsScores1);
+        let avgKoalas1 = calcAverage(...koalasScores1);
+
+        let avgDolphins2 = calcAverage(...dolphinsScores2);
+        let avgKoalas2 = calcAverage(...koalasScores2);
+
+        // Display results
+        function displayResults() {
+            let resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = '';
+
+            resultDiv.innerHTML += `<h2>Data 1:</h2><p>${checkWinner(avgDolphins1, avgKoalas1)}</p>`;
+            resultDiv.innerHTML += `<h2>Data 2:</h2><p>${checkWinner(avgDolphins2, avgKoalas2)}</p>`;
+        }
+
+        // Run the function to display results
+        displayResults();
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        .hidden { display: none; }
+        .number {
+            width: 15rem; /* Original width */
+            height: 15rem;
+            border-radius: 50%;
+            background-color: #222; /* Original background color */
+            color: #fff;
+            font-size: 6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto;
+        }
+        body { font-family: Arial, sans-serif; }
+        .message { font-size: 2rem; margin: 1rem 0; }
+    </style>
+</head>
+<body>
+    <h1>Guess My Number!</h1>
+    <div class="number">?</div>
+    <div class="message">Start guessing...</div>
+    <input type="number" class="guess" placeholder="Enter your guess">
+    <button class="check">Check!</button>
+    <button class="again">Again!</button>
+
+    <script>
+        let secretNumber;
+        let score;
+        let highscore = 0;
+
+        const numberElement = document.querySelector('.number');
+        const messageElement = document.querySelector('.message');
+        const guessInput = document.querySelector('.guess');
+        const checkButton = document.querySelector('.check');
+        const againButton = document.querySelector('.again');
+
+        function initializeGame() {
+            score = 20;
+            secretNumber = Math.trunc(Math.random() * 20) + 1;
+            numberElement.textContent = '?';
+            numberElement.style.width = '15rem'; // Reset width
+            numberElement.style.backgroundColor = '#222'; // Reset color
+            messageElement.textContent = 'Start guessing...';
+            guessInput.value = '';
+            document.querySelector('body').style.backgroundColor = '#222'; // Reset background color
+        }
+
+        // Initialize game on page load
+        initializeGame();
+
+        // Check button click handler
+        checkButton.addEventListener('click', function() {
+            const guess = Number(guessInput.value);
+
+            if (!guess) {
+                messageElement.textContent = '⛔ No number!';
+            } else if (guess === secretNumber) {
+                messageElement.textContent = '🎉 Correct number!';
+                numberElement.textContent = secretNumber;
+                numberElement.style.width = '30rem'; // Bigger width on correct guess
+                numberElement.style.backgroundColor = '#60b347'; // Green background on correct guess
+
+                if (score > highscore) {
+                    highscore = score;
+                    document.querySelector('.highscore').textContent = highscore;
+                }
+            } else {
+                if (score > 1) {
+                    messageElement.textContent = guess > secretNumber ? '📈 Too high!' : '📉 Too low!';
+                    score--;
+                } else {
+                    messageElement.textContent = '💥 You lost the game!';
+                    score = 0;
+                }
+            }
+        });
+
+        // Again button click handler
+        againButton.addEventListener('click', initializeGame);
+
+    </script>
+</body>
+</html>

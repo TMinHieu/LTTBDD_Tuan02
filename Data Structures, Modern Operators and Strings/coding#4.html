@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Challenge #4</title>
+    <style>
+        textarea, button {
+            display: block;
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Variable Name Converter</h1>
+    <textarea id="input" rows="10" cols="30" placeholder="Paste your variable names here..."></textarea>
+    <button id="convert">Convert to camelCase</button>
+    <script>
+        document.getElementById('convert').addEventListener('click', () => {
+            const textarea = document.getElementById('input');
+            const variables = textarea.value.trim().split('\n');
+
+            variables.forEach(variable => {
+                const camelCase = toCamelCase(variable);
+                const checks = '✅'.repeat(variable.split('_').length - 1);
+                console.log(`${camelCase} ${checks}`);
+            });
+        });
+
+        function toCamelCase(variable) {
+            return variable
+                .toLowerCase()
+                .split('_')
+                .map((word, index) => 
+                    index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)
+                )
+                .join('');
+        }
+    </script>
+</body>
+</html>

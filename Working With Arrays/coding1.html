@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Age Checker</title>
+</head>
+<body>
+    <h1>Dog Age Checker</h1>
+
+    <script>
+        function checkDogs(dogsJulia, dogsKate) {
+            // 1. Tạo một bản sao nông của mảng Julia và loại bỏ các giá trị không cần thiết
+            const dogsJuliaCorrected = dogsJulia.slice(1, -2);
+            console.log("Julia's corrected data:", dogsJuliaCorrected);
+
+            // 2. Tạo một mảng kết hợp giữa dữ liệu của Julia và Kate
+            const allDogs = dogsJuliaCorrected.concat(dogsKate);
+            console.log("Combined data:", allDogs);
+
+            // 3. Kiểm tra và log ra console xem chó là adult hay puppy
+            allDogs.forEach(function (age, i) {
+                if (age >= 3) {
+                    console.log(`Dog number ${i + 1} is an adult, and is ${age} years old`);
+                } else {
+                    console.log(`Dog number ${i + 1} is still a puppy`);
+                }
+            });
+        }
+
+        // Test data 1
+        const data1Julia = [3, 5, 2, 12, 7];
+        const data1Kate = [4, 1, 15, 8, 3];
+        checkDogs(data1Julia, data1Kate);
+
+        console.log('------------------------------');
+
+        // Test data 2
+        const data2Julia = [9, 16, 6, 8, 3];
+        const data2Kate = [10, 5, 6, 1, 4];
+        checkDogs(data2Julia, data2Kate);
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Betting App</title>
+</head>
+<body>
+    <h1>Football Betting App</h1>
+    <div id="output"></div>
+
+    <script>
+        // Dữ liệu trận đấu
+        const game = {
+            team1: 'Bayern Munich',
+            team2: 'Borussia Dortmund',
+            players: [
+                ['Neuer', 'Pavard', 'Martinez', 'Alaba', 'Davies', 'Kimmich', 'Goretzka', 'Muller', 'Coman', 'Lewandowski', 'Tolisso'],
+                ['Burki', 'Piszczek', 'Hummels', 'Akanji', 'Schulz', 'Witsel', 'Brandt', 'Reus', 'Sancho', 'Gotze', 'Hazard']
+            ],
+            odds: {
+                team1: 1.33,
+                draw: 3.25,
+                team2: 6.5
+            },
+            scored: ['Davies', 'Muller', 'Lewandowski', 'Kimmich']
+        };
+
+        // 1. In từng tên cầu thủ và số bàn thắng
+        game.scored.forEach((player, index) => {
+            console.log(`Goal ${index + 1}: ${player}`);
+        });
+
+        // 2. Tính toán tỷ lệ cược trung bình và in ra console
+        const odds = Object.values(game.odds);
+        const averageOdd = odds.reduce((sum, odd) => sum + odd, 0) / odds.length;
+        console.log(`Average odd: ${averageOdd}`);
+
+        // 3. In tỷ lệ cược theo định dạng yêu cầu
+        console.log(`Odd of victory ${game.team1}: ${game.odds.team1}`);
+        console.log(`Odd of draw: ${game.odds.draw}`);
+        console.log(`Odd of victory ${game.team2}: ${game.odds.team2}`);
+
+        // 4. Tạo đối tượng 'scorers'
+        const scorers = game.scored.reduce((acc, player) => {
+            acc[player] = (acc[player] || 0) + 1;
+            return acc;
+        }, {});
+        
+        console.log('Scorers:', scorers);
+
+        // Hiển thị kết quả trên trang web
+        const outputDiv = document.getElementById('output');
+        outputDiv.innerHTML = `
+            <h2>Game Statistics</h2>
+            <p>Average odd: ${averageOdd.toFixed(2)}</p>
+            <p>Odd of victory ${game.team1}: ${game.odds.team1}</p>
+            <p>Odd of draw: ${game.odds.draw}</p>
+            <p>Odd of victory ${game.team2}: ${game.odds.team2}</p>
+            <h3>Scorers:</h3>
+            <ul>
+                ${Object.entries(scorers).map(([player, goals]) => `<li>${player}: ${goals}</li>`).join('')}
+            </ul>
+        `;
+    </script>
+</body>
+</html>

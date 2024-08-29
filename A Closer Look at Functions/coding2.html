@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poll App and Header Color Change</title>
+    <style>
+        /* Styling for the header */
+        h1 {
+            color: red; /* Initial color set by JavaScript */
+        }
+        /* Styling for the poll */
+        .poll-container {
+            margin: 20px;
+        }
+        .poll-option {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Poll app -->
+    <div class="poll-container">
+        <h2>What's your favorite programming language?</h2>
+        <button id="answerPoll">Answer Poll</button>
+        <div>
+            <p>0: JavaScript</p>
+            <p>1: Python</p>
+            <p>2: Rust</p>
+            <p>3: C++</p>
+        </div>
+        <h3>Poll Results:</h3>
+        <div id="results"></div>
+    </div>
+
+    <!-- Header element -->
+    <h1>Change My Color!</h1>
+
+    <!-- JavaScript code -->
+    <script>
+        // Poll app functionality
+        const poll = {
+            question: "What's your favorite programming language?",
+            options: ['JavaScript', 'Python', 'Rust', 'C++'],
+            answers: [0, 0, 0, 0],
+            registerNewAnswer() {
+                const input = prompt(
+                    `${this.question}\n0: ${this.options[0]}\n1: ${this.options[1]}\n2: ${this.options[2]}\n3: ${this.options[3]}\n(Write option number)`
+                );
+                const answer = Number(input);
+                if (answer >= 0 && answer < this.answers.length) {
+                    this.answers[answer]++;
+                    this.displayResults();
+                } else {
+                    alert('Invalid option. Please try again.');
+                }
+            },
+            displayResults(type = 'array') {
+                const resultsElement = document.getElementById('results');
+                if (type === 'array') {
+                    resultsElement.textContent = `Poll results are ${this.answers.join(', ')}`;
+                } else if (type === 'string') {
+                    resultsElement.textContent = `Poll results are ${this.answers.join(', ')}`;
+                }
+            }
+        };
+
+        // Add event listener for the poll button
+        document.getElementById('answerPoll').addEventListener('click', () => {
+            poll.registerNewAnswer();
+        });
+
+        // Header color change functionality
+        (function () {
+            const header = document.querySelector('h1');
+            header.style.color = 'red';
+
+            document.body.addEventListener('click', function() {
+                header.style.color = 'blue';
+            });
+        })();
+    </script>
+</body>
+</html>

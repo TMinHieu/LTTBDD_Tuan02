@@ -34,7 +34,7 @@
         let markHigherBMI1 = markBMI1 > johnBMI1;
         let markHigherBMI2 = markBMI2 > johnBMI2;
 
-        // Display results
+        // Display results in HTML
         document.getElementById("result").innerHTML = `
             <h2>Data 1:</h2>
             <p>Mark's BMI: ${markBMI1.toFixed(2)}</p>
@@ -46,6 +46,19 @@
             <p>John's BMI: ${johnBMI2.toFixed(2)}</p>
             <p>Does Mark have a higher BMI? ${markHigherBMI2}</p>
         `;
+
+        // Print nice output to the console
+        if (markHigherBMI1) {
+            console.log(`Mark's BMI (${markBMI1.toFixed(2)}) is higher than John's (${johnBMI1.toFixed(2)})!`);
+        } else {
+            console.log(`John's BMI (${johnBMI1.toFixed(2)}) is higher than Mark's (${markBMI1.toFixed(2)})!`);
+        }
+
+        if (markHigherBMI2) {
+            console.log(`Mark's BMI (${markBMI2.toFixed(2)}) is higher than John's (${johnBMI2.toFixed(2)})!`);
+        } else {
+            console.log(`John's BMI (${johnBMI2.toFixed(2)}) is higher than Mark's (${markBMI2.toFixed(2)})!`);
+        }
     </script>
 </body>
 </html>

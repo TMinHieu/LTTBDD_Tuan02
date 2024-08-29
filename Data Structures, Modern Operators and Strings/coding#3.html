@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Betting App - Game Events</title>
+</head>
+<body>
+    <h1>Football Game Events</h1>
+    <div id="output"></div>
+
+    <script>
+        // Dữ liệu sự kiện trận đấu
+        const gameEvents = new Map([
+            [17, '⚽ GOAL'],
+            [25, '🔔 SUBSTITUTION'],
+            [37, '🔔 SUBSTITUTION'],
+            [45, '🟡 YELLOW CARD'],
+            [64, '🟡 YELLOW CARD'],
+            [70, '⚽ GOAL'],
+            [85, '🔔 SUBSTITUTION']
+        ]);
+
+        // 1. Tạo mảng 'events' với các sự kiện khác nhau (không trùng lặp)
+        const events = [...new Set(gameEvents.values())];
+        console.log('Events:', events);
+
+        // 2. Xóa sự kiện ở phút 64 (thẻ vàng)
+        gameEvents.delete(64);
+        console.log('Updated game events:', gameEvents);
+
+        // 3. Tính toán và in ra khoảng thời gian trung bình giữa các sự kiện
+        const minutes = [...gameEvents.keys()];
+        const averageTime = (90 / minutes.length).toFixed(2);
+        console.log(`An event happened, on average, every ${averageTime} minutes`);
+
+        // 4. Lặp qua 'gameEvents' và in từng sự kiện với phân loại theo hiệp
+        gameEvents.forEach((event, minute) => {
+            const half = minute <= 45 ? 'FIRST HALF' : 'SECOND HALF';
+            console.log(`[${half}] ${minute}: ${event}`);
+        });
+
+        // Hiển thị kết quả trên trang web
+        const outputDiv = document.getElementById('output');
+        outputDiv.innerHTML = `
+            <h2>Game Events</h2>
+            <p><strong>Events:</strong> ${events.join(', ')}</p>
+            <p><strong>Updated Game Events:</strong></p>
+            <ul>
+                ${[...gameEvents.entries()].map(([minute, event]) => `<li>${minute} min: ${event}</li>`).join('')}
+            </ul>
+            <p>An event happened, on average, every ${averageTime} minutes</p>
+            <h3>Event Details:</h3>
+            <ul>
+                ${[...gameEvents.entries()].map(([minute, event]) => `<li>[${minute <= 45 ? 'FIRST HALF' : 'SECOND HALF'}] ${minute}: ${event}</li>`).join('')}
+            </ul>
+        `;
+    </script>
+</body>
+</html>

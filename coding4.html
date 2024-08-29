@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator</title>
+</head>
+<body>
+    <h1>Tip Calculator</h1>
+    <div id="result"></div>
+
+    <script>
+        // Function to calculate the tip based on the bill value
+        function calculateTip(bill) {
+            // Using ternary operator to determine the tip percentage
+            let tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.20;
+            return tip;
+        }
+
+        // Data
+        let billValues = [275, 40, 430];
+
+        // Display results
+        function displayResults() {
+            let resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = '';
+
+            billValues.forEach(bill => {
+                let tip = calculateTip(bill);
+                let total = bill + tip;
+                resultDiv.innerHTML += `<p>The bill was ${bill}, the tip was ${tip.toFixed(2)}, and the total value is ${total.toFixed(2)}.</p>`;
+            });
+        }
+
+        // Run the function to display results
+        displayResults();
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Forecast</title>
+</head>
+<body>
+    <h1>Temperature Forecast</h1>
+    <div id="result"></div>
+
+    <script>
+        // Function to print forecast
+        function printForecast(arr) {
+            // Initialize an empty array to store the forecast strings
+            const forecast = [];
+            
+            // Iterate over the array using the map method
+            arr.map((temp, index) => {
+                forecast.push(`... ${temp}°C in ${index + 1} days`);
+            });
+
+            // Join the array into a single string with spaces
+            const forecastString = forecast.join(' ');
+
+            // Log the forecast string to the console
+            console.log(forecastString);
+
+            // Display the result in the HTML
+            document.getElementById('result').innerText = forecastString;
+        }
+
+        // Test data
+        const data1 = [17, 21, 23];
+        const data2 = [12, 5, -5, 0, 4];
+
+        // Call the function with test data
+        printForecast(data1);
+        // Uncomment the line below to test with data2
+        // printForecast(data2);
+    </script>
+</body>
+</html>

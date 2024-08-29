@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gymnastics Competition</title>
+</head>
+<body>
+    <h1>Gymnastics Competition Results</h1>
+    <div id="result"></div>
+
+    <script>
+        // Function to calculate average score
+        function calculateAverage(score1, score2, score3) {
+            return (score1 + score2 + score3) / 3;
+        }
+
+        // Data 1
+        let dolphinsScores1 = [96, 108, 89];
+        let koalasScores1 = [88, 91, 110];
+
+        // Bonus 1
+        let dolphinsScoresBonus1 = [97, 112, 101];
+        let koalasScoresBonus1 = [109, 95, 123];
+
+        // Bonus 2
+        let dolphinsScoresBonus2 = [97, 112, 101];
+        let koalasScoresBonus2 = [109, 95, 106];
+
+        // Calculate averages
+        let dolphinsAverage1 = calculateAverage(...dolphinsScores1);
+        let koalasAverage1 = calculateAverage(...koalasScores1);
+
+        let dolphinsAverageBonus1 = calculateAverage(...dolphinsScoresBonus1);
+        let koalasAverageBonus1 = calculateAverage(...koalasScoresBonus1);
+
+        let dolphinsAverageBonus2 = calculateAverage(...dolphinsScoresBonus2);
+        let koalasAverageBonus2 = calculateAverage(...koalasScoresBonus2);
+
+        // Function to determine winner
+        function determineWinner(dolphinsAvg, koalasAvg) {
+            if (dolphinsAvg > koalasAvg) {
+                return "Dolphins win!";
+            } else if (koalasAvg > dolphinsAvg) {
+                return "Koalas win!";
+            } else {
+                return "It's a draw!";
+            }
+        }
+
+        // Bonus 1 & 2: Determine winner with minimum score requirement
+        function determineWinnerWithMinScore(dolphinsAvg, koalasAvg) {
+            const minScore = 100;
+            if (dolphinsAvg >= minScore && dolphinsAvg > koalasAvg) {
+                return `Dolphins win with an average score of ${dolphinsAvg.toFixed(2)}!`;
+            } else if (koalasAvg >= minScore && koalasAvg > dolphinsAvg) {
+                return `Koalas win with an average score of ${koalasAvg.toFixed(2)}!`;
+            } else if (dolphinsAvg >= minScore && koalasAvg >= minScore && dolphinsAvg === koalasAvg) {
+                return `It's a draw with both teams scoring ${dolphinsAvg.toFixed(2)}!`;
+            } else {
+                return "No team wins the trophy.";
+            }
+        }
+
+        // Display results
+        document.getElementById("result").innerHTML = `
+            <h2>Data 1:</h2>
+            <p>${determineWinner(dolphinsAverage1, koalasAverage1)}</p>
+
+            <h2>Bonus Data 1:</h2>
+            <p>${determineWinnerWithMinScore(dolphinsAverageBonus1, koalasAverageBonus1)}</p>
+
+            <h2>Bonus Data 2:</h2>
+            <p>${determineWinnerWithMinScore(dolphinsAverageBonus2, koalasAverageBonus2)}</p>
+        `;
+
+        // Print results to the console
+        console.log("Data 1:");
+        console.log(determineWinner(dolphinsAverage1, koalasAverage1));
+
+        console.log("Bonus Data 1:");
+        console.log(determineWinnerWithMinScore(dolphinsAverageBonus1, koalasAverageBonus1));
+
+        console.log("Bonus Data 2:");
+        console.log(determineWinnerWithMinScore(dolphinsAverageBonus2, koalasAverageBonus2));
+    </script>
+</body>
+</html>
